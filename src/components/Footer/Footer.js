@@ -74,7 +74,7 @@ const Footer = () => {
 
       <div
         className="text-center p-4"
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.2);" }}
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
         © 2022 Copyright:&nbsp;
         <span className="text-white">MyVentory</span>
