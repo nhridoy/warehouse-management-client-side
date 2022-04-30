@@ -38,6 +38,14 @@ const HomeProducts = () => {
           </div>
         </div>
       </div>
+      <div className="text-center">
+        <button
+          onClick={() => navigate("/all")}
+          className="mt-4 text-white bg-gray-900 border-2 border-gray-900 rounded-md px-2 py-1"
+        >
+          Manage Inventories
+        </button>
+      </div>
     </div>
   );
 };

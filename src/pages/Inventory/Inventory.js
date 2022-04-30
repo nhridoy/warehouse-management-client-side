@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const Inventory = () => {
   const {
@@ -7,6 +8,7 @@ const Inventory = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -57,6 +59,14 @@ const Inventory = () => {
             Add
           </button>
         </form>
+      </div>
+      <div className="text-center my-4">
+        <button
+          onClick={() => navigate("/all")}
+          className="mt-4 text-white bg-gray-900 border-2 border-gray-900 rounded-md px-2 py-1"
+        >
+          Manage Inventories
+        </button>
       </div>
     </div>
   );
