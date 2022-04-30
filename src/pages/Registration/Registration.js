@@ -7,6 +7,7 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Registration = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -97,6 +98,13 @@ const Registration = () => {
           )}
         </button>
       </form>
+
+      <p className="text-center mt-4">
+        Already have an account?{" "}
+        <Link to="/login">
+          <span className="text-blue-500">Login</span>
+        </Link>
+      </p>
 
       <Social />
     </div>

@@ -13,7 +13,7 @@ const HomeProducts = () => {
           Recent Added
         </h2>
       </div>
-      <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mt-4">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mt-4">
         <div className="p-4 border rounded-lg">
           <img
             className=""
