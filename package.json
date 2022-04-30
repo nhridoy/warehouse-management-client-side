@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.2.1",
     "axios": "^0.27.2",
     "counterup2": "^2.0.2",
+    "firebase": "^9.7.0",
     "react": "^18.1.0",
     "react-data-table-component": "^7.5.0",
     "react-dom": "^18.1.0",
