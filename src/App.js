@@ -6,6 +6,7 @@ import AddNew from "./pages/AddNew/AddNew";
 import AllProduct from "./pages/AllProduct/AllProduct";
 import Home from "./pages/Home/Home";
 import Inventory from "./pages/Inventory/Inventory";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/all" element={<AllProduct />} />
         <Route path="/addnew" element={<AddNew />} />
         <Route path="/myitems" element={<AllProduct />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>
