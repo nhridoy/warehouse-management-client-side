@@ -16,6 +16,7 @@ function App() {
         <Route path="/inventory/:id" element={<Inventory />} />
         <Route path="/all" element={<AllProduct />} />
         <Route path="/addnew" element={<AddNew />} />
+        <Route path="/myitems" element={<AllProduct />} />
       </Routes>
       <Footer />
     </div>
