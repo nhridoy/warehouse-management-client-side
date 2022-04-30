@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="backdrop-blur-sm bg-black/30 fixed w-full z-10 top-0">
+    <div className="backdrop-blur-lg bg-black/30 fixed w-full z-10 top-0">
       <div className=" container p-4 mx-auto  flex justify-between items-center">
         <h1 className="text-4xl text-white">MyVentory</h1>
         <div className="flex gap-4 items-center">
