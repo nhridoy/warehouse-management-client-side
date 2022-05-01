@@ -17,6 +17,7 @@ const BlogItem = () => {
             </Link>
           </h3>
           <p className="text-sm text-gray-600">Blog Author</p>
+          <p className="text-sm text-gray-600">hridoyboss12@gmail.com</p>
 
           <p className="text-sm text-gray-600">02/02/2020</p>
         </>
