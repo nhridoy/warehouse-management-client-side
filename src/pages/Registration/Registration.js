@@ -9,6 +9,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import jwtToken from "../../utils/jwtToken";
 
 const Registration = () => {
   const [user] = useAuthState(auth);
@@ -29,6 +30,7 @@ const Registration = () => {
   let from = location.state?.from?.pathname || "/";
   if (user) {
     navigate(from, { replace: true });
+    jwtToken(user.email);
   }
   const onSubmit = async (data) => {
     setPasswordError(null);
