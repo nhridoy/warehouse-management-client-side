@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { FcFullTrash } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const AllProduct = () => {
   const [data, setData] = React.useState([]);
@@ -20,10 +22,46 @@ const AllProduct = () => {
       });
   }, []);
 
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.value) {
+        axios
+          .delete(`http://localhost:5000/items/${id}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((res) => {
+            toast.success("Item deleted successfully");
+            setData(data.filter((item) => item._id !== id));
+          });
+      }
+    });
+  };
+
   const columns = [
     {
       name: "ID",
       selector: (row) => row._id,
+      sortable: true,
+    },
+    {
+      name: "Image",
+      selector: (row) => (
+        <img
+          className="h-16 w-16 rounded-full border-4 object-cover"
+          src={row.image}
+          alt="product"
+        />
+      ),
       sortable: true,
     },
     {
@@ -33,6 +71,11 @@ const AllProduct = () => {
           {row.name}
         </Link>
       ),
+      sortable: true,
+    },
+    {
+      name: "Supplier",
+      selector: (row) => row?.supplier,
       sortable: true,
     },
     {
@@ -47,8 +90,8 @@ const AllProduct = () => {
     },
     {
       name: "Action",
-      cell: () => (
-        <button>
+      cell: (row) => (
+        <button onClick={() => handleDelete(row._id)}>
           <FcFullTrash className="text-xl" />
         </button>
       ),
