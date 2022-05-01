@@ -8,7 +8,7 @@ import Social from "../../components/Social/Social";
 import auth from "../../firebase.init";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import jwtToken from "../../utils/jwtToken";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,16 +30,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
-
-    // GET ACCESS TOKEN
-    axios
-      .post("http://localhost:5000/login", {
-        email: data.email,
-      })
-      .then((res) => {
-        console.log(res.data.token);
-        localStorage.setItem("token", res.data.token);
-      });
+    jwtToken(data.email);
   };
 
   return (

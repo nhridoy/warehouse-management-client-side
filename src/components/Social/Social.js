@@ -3,6 +3,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useLocation, useNavigate } from "react-router-dom";
+import jwtToken from "../../utils/jwtToken";
 
 const Social = () => {
   const [user] = useAuthState(auth);
@@ -13,6 +14,7 @@ const Social = () => {
   let from = location.state?.from?.pathname || "/";
   if (user) {
     navigate(from, { replace: true });
+    jwtToken(user.email);
   }
 
   return (
