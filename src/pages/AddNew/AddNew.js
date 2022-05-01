@@ -1,14 +1,37 @@
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const AddNew = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    axios
+      .post(
+        "http://localhost:5000/items",
+        {
+          name: data.name,
+          description: data.description,
+          price: data.price,
+          image: data.image,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          reset();
+          toast.success("Item added successfully");
+        }
+      });
   };
   return (
     <div className="container mx-auto my-20">
