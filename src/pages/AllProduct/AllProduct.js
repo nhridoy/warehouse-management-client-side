@@ -3,24 +3,38 @@ import React, { useEffect } from "react";
 
 import DataTable from "react-data-table-component";
 import { FcFullTrash } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const AllProduct = () => {
   const [data, setData] = React.useState([]);
 
+  const path = useLocation().pathname;
+
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/items", {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setData(res.data);
-      });
-  }, []);
+    if (path === "/all") {
+      axios
+        .get("http://localhost:5000/items", {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          setData(res.data);
+        });
+    } else if (path === "/myitems") {
+      axios
+        .get("http://localhost:5000/myitems", {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          setData(res.data);
+        });
+    }
+  }, [path]);
 
   const handleDelete = (id) => {
     Swal.fire({
