@@ -17,8 +17,8 @@ const AddNew = () => {
         {
           name: data.name,
           description: data.description,
-          price: data.price,
-          quantity: data.quantity,
+          price: parseFloat(data.price).toFixed(2),
+          quantity: parseInt(data.quantity),
           supplier: data.supplier,
           image: data.image,
         },
