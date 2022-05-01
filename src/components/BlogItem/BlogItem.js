@@ -12,7 +12,7 @@ const BlogItem = () => {
       <div className="">
         <>
           <h3 className="text-lg font-semibold">
-            <Link to="#" className="hover:underline">
+            <Link to="5" className="hover:underline">
               Blog Title
             </Link>
           </h3>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import BlogItem from "../../components/BlogItem/BlogItem";
 
 const Blogs = () => {
@@ -21,6 +22,7 @@ const Blogs = () => {
         <BlogItem />
         <BlogItem />
       </>
+      <Outlet />
     </div>
   );
 };
