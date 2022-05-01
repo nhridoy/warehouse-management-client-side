@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Blogs from "./pages/Blogs/Blogs";
 import Blog from "./pages/Blog/Blog";
+import CreateBlog from "./pages/CreateBlog/CreateBlog";
 
 function App() {
   return (
@@ -56,6 +57,14 @@ function App() {
         />
         <Route path="/blogs" element={<Blogs />}></Route>
         <Route path="/blogs/:id" element={<Blog />} />
+        <Route
+          path="/create-blog"
+          element={
+            <RequireAuth>
+              <CreateBlog />
+            </RequireAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/reset-password" element={<ForgotPassword />} />

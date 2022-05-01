@@ -16,9 +16,9 @@ const BlogItem = () => {
               Blog Title
             </Link>
           </h3>
-          <p className="text-sm text-gray-600">
-            <p className="hover:underline">Blog Author</p>
-          </p>
+          <p className="text-sm text-gray-600">Blog Author</p>
+
+          <p className="text-sm text-gray-600">02/02/2020</p>
         </>
         <p className="mt-2 text-gray-700">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
