@@ -1,62 +1,64 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 import DataTable from "react-data-table-component";
 import { FcFullTrash } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 
-const columns = [
-  {
-    name: "No",
-    selector: (row) => row.id,
-    sortable: true,
-  },
-  {
-    name: "Name",
-    selector: (row) => (
-      <Link className="text-blue-600 underline" to={`/inventory/${row.id}`}>
-        {row.title}
-      </Link>
-    ),
-    sortable: true,
-  },
-  {
-    name: "Title",
-    selector: (row) => row.year,
-    sortable: true,
-  },
-  {
-    name: "Price",
-    selector: (row) => row.year,
-    sortable: true,
-  },
-  {
-    name: "Action",
-    cell: () => (
-      <button>
-        <FcFullTrash className="text-xl" />
-      </button>
-    ),
-    // ignoreRowClick: true,
-    // allowOverflow: true,
-    button: true,
-    sortable: false,
-  },
-];
-
-const data = [
-  {
-    id: 1,
-    title: "Beetlejuice",
-    year: "1988",
-  },
-  {
-    id: 2,
-    title: "Ghostbusters",
-    year: "1984",
-  },
-];
-
 const AllProduct = () => {
+  const [data, setData] = React.useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/items", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setData(res.data);
+      });
+  }, []);
+
+  const columns = [
+    {
+      name: "ID",
+      selector: (row) => row._id,
+      sortable: true,
+    },
+    {
+      name: "Name",
+      selector: (row) => (
+        <Link className="text-blue-600 underline" to={`/inventory/${row._id}`}>
+          {row.name}
+        </Link>
+      ),
+      sortable: true,
+    },
+    {
+      name: "Quantity",
+      selector: (row) => row.quantity,
+      sortable: true,
+    },
+    {
+      name: "Price",
+      selector: (row) => row.price,
+      sortable: true,
+    },
+    {
+      name: "Action",
+      cell: () => (
+        <button>
+          <FcFullTrash className="text-xl" />
+        </button>
+      ),
+      // ignoreRowClick: true,
+      // allowOverflow: true,
+      button: true,
+      sortable: false,
+    },
+  ];
+
   const navigate = useNavigate();
   return (
     <div className="container mx-auto mt-20">

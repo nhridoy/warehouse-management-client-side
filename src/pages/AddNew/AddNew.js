@@ -18,6 +18,7 @@ const AddNew = () => {
           name: data.name,
           description: data.description,
           price: data.price,
+          quantity: data.quantity,
           image: data.image,
         },
         {
