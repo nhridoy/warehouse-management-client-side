@@ -10,10 +10,12 @@ const Inventory = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    console.log(data);
+    handleQuantity(parseInt(data.number));
+    reset();
   };
 
   useEffect(() => {
@@ -27,6 +29,23 @@ const Inventory = () => {
         setItem(res.data);
       });
   }, []);
+
+  const handleQuantity = (number) => {
+    axios.patch(
+      `http://localhost:5000/items/${id}`,
+      {
+        quantity: item.quantity + number,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    const newItem = { ...item, quantity: item.quantity + number };
+    setItem(newItem);
+  };
+
   return (
     <div className="container mx-auto mt-20">
       <div className="grid grid-cols-2 items-center gap-4">
@@ -43,7 +62,10 @@ const Inventory = () => {
           <p className="text-gray-900">{item.price}</p>
           <p className="text-gray-900">{item.quantity} pc</p>
 
-          <button className="mt-4 text-white bg-gray-900 border-2 border-gray-900 rounded-md px-2 py-1">
+          <button
+            onClick={() => handleQuantity(-1)}
+            className="mt-4 text-white bg-gray-900 border-2 border-gray-900 rounded-md px-2 py-1"
+          >
             Delivered
           </button>
         </div>
