@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import Registration from "./pages/Registration/Registration";
 import "react-toastify/dist/ReactToastify.min.css";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
+import Blogs from "./pages/Blogs/Blogs";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route path="/blogs" element={<Blogs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/reset-password" element={<ForgotPassword />} />
