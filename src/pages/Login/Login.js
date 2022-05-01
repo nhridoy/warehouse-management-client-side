@@ -1,26 +1,36 @@
 import React from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import Social from "../../components/Social/Social";
 import auth from "../../firebase.init";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
+  let location = useLocation();
 
+  const [signInWithEmailAndPassword, signUser, signLoading, signError] =
+    useSignInWithEmailAndPassword(auth);
+  const [user, loading, error] = useAuthState(auth);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  let from = location.state?.from?.pathname || "/";
+  if (user) {
+    navigate(from, { replace: true });
+  }
+
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
   };
-  user && navigate("/");
+
   return (
     <div className="container mx-auto my-20">
       <h2 className="text-3xl text-center my-4">Login</h2>
@@ -47,14 +57,14 @@ const Login = () => {
           <span className="text-red-600">This field is required</span>
         )}
 
-        {error && (
+        {signError && (
           <span className="text-red-600">Email or Password Does not Match</span>
         )}
         <button
           type="submit"
           className="bg-blue-500 text-white p-2 rounded-lg text-center flex justify-center items-center"
         >
-          {loading ? (
+          {signLoading ? (
             <AiOutlineLoading3Quarters className="animate-spin m-1" />
           ) : (
             "Login"

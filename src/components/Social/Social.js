@@ -1,10 +1,20 @@
 import React from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Social = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [user] = useAuthState(auth);
+  const [signInWithGoogle, newUser, loading, error] = useSignInWithGoogle(auth);
+  const navigate = useNavigate();
+  let location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
+  if (user) {
+    navigate(from, { replace: true });
+  }
+
   return (
     <div className="flex justify-center mt-10">
       <button

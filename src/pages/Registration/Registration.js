@@ -3,16 +3,20 @@ import { useForm } from "react-hook-form";
 import Social from "../../components/Social/Social";
 import auth from "../../firebase.init";
 import {
+  useAuthState,
   useCreateUserWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Registration = () => {
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [user] = useAuthState(auth);
+  const [createUserWithEmailAndPassword, SignUpUser, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating] = useUpdateProfile(auth);
+  const navigate = useNavigate();
+  let location = useLocation();
 
   const [passwordError, setPasswordError] = React.useState("");
 
@@ -22,12 +26,16 @@ const Registration = () => {
     formState: { errors },
   } = useForm();
 
+  let from = location.state?.from?.pathname || "/";
+  if (user) {
+    navigate(from, { replace: true });
+  }
   const onSubmit = async (data) => {
     setPasswordError(null);
     data.password !== data.confirmPassword
       ? setPasswordError("Password and Confirm Password must be same")
       : await createUserWithEmailAndPassword(data.email, data.password);
-    if (user && !error) {
+    if (SignUpUser && !error) {
       await updateProfile({
         displayName: data.name,
         photoURL: "https://i.pravatar.cc/300",
@@ -81,7 +89,7 @@ const Registration = () => {
         )}
         {error && <span className="text-red-600">{error.message}</span>}
         {passwordError && <span className="text-red-600">{passwordError}</span>}
-        {user && !error && (
+        {SignUpUser && !error && (
           <span className="text-green-600">
             User created successfully. Please verify your email.
           </span>

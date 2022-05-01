@@ -12,6 +12,7 @@ import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import Registration from "./pages/Registration/Registration";
 import "react-toastify/dist/ReactToastify.min.css";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 
 function App() {
   return (
@@ -19,10 +20,38 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/inventory/:id" element={<Inventory />} />
-        <Route path="/all" element={<AllProduct />} />
-        <Route path="/addnew" element={<AddNew />} />
-        <Route path="/myitems" element={<AllProduct />} />
+        <Route
+          path="/inventory/:id"
+          element={
+            <RequireAuth>
+              <Inventory />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/all"
+          element={
+            <RequireAuth>
+              <AllProduct />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/addnew"
+          element={
+            <RequireAuth>
+              <AddNew />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/myitems"
+          element={
+            <RequireAuth>
+              <AllProduct />
+            </RequireAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/reset-password" element={<ForgotPassword />} />
