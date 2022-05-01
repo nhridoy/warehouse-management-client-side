@@ -8,14 +8,15 @@ import Social from "../../components/Social/Social";
 import auth from "../../firebase.init";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
   let location = useLocation();
 
-  const [signInWithEmailAndPassword, signUser, signLoading, signError] =
+  const [signInWithEmailAndPassword, signUser, signLoading, error] =
     useSignInWithEmailAndPassword(auth);
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const {
     register,
     handleSubmit,
@@ -29,6 +30,16 @@ const Login = () => {
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
+
+    // GET ACCESS TOKEN
+    axios
+      .post("http://localhost:5000/login", {
+        email: data.email,
+      })
+      .then((res) => {
+        console.log(res.data.token);
+        localStorage.setItem("token", res.data.token);
+      });
   };
 
   return (
@@ -57,7 +68,7 @@ const Login = () => {
           <span className="text-red-600">This field is required</span>
         )}
 
-        {signError && (
+        {error && (
           <span className="text-red-600">Email or Password Does not Match</span>
         )}
         <button
