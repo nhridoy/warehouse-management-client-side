@@ -34,10 +34,11 @@ const Registration = () => {
   }
   const onSubmit = async (data) => {
     setPasswordError(null);
-    data.password !== data.confirmPassword
-      ? setPasswordError("Password and Confirm Password must be same")
-      : await createUserWithEmailAndPassword(data.email, data.password);
-    if (SignUpUser && !error) {
+    if (data.password !== data.confirmPassword) {
+      setPasswordError("Password and Confirm Password must be same");
+    } else {
+      await createUserWithEmailAndPassword(data.email, data.password);
+
       await updateProfile({
         displayName: data.name,
         photoURL: "https://i.pravatar.cc/300",

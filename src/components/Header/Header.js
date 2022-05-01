@@ -6,6 +6,7 @@ import auth from "../../firebase.init";
 
 const Header = () => {
   const [user, loading, error] = useAuthState(auth);
+  console.log(user);
   return (
     <div className="backdrop-blur-lg bg-black/30 fixed w-full z-10 top-0">
       <div className=" container p-4 mx-auto  flex justify-between items-center">
@@ -34,6 +35,16 @@ const Header = () => {
               <button onClick={() => signOut(auth)} className="text-white">
                 Logout
               </button>
+              <img
+                className="w-10 rounded-full"
+                src={
+                  user?.photoURL
+                    ? user?.photoURL
+                    : "https://via.placeholder.com/150"
+                }
+                alt={user?.displayName}
+              />
+              <p className="text-white">{user?.displayName}</p>
             </>
           ) : (
             <>
