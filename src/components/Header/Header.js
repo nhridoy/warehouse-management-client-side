@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
     <div className="backdrop-blur-lg bg-black/30 fixed w-full z-10 top-0">
-      <div className=" container p-4 mx-auto  flex justify-between items-center">
+      <div className="container p-4 mx-auto flex flex-col md:flex-row gap-4 justify-between items-center">
         <Link to="/">
           <h1 className="text-4xl text-white">MyVentory</h1>
         </Link>
