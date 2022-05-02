@@ -1,18 +1,33 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const Blog = () => {
+  const { id } = useParams();
+  const [blogData, setBlogData] = React.useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/blogs/${id}`).then((res) => {
+      setBlogData(res.data);
+    });
+  }, []);
+
   return (
     <div className="container mx-auto mt-20">
       <div className="relative">
         <img
           className="h-72 w-full object-cover"
-          src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-          alt=""
+          src={blogData.image}
+          alt={blogData.title}
         />
         <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full bg-black/50 ">
-          <h2 className="text-white text-2xl font-bold absolute">Blog Title</h2>
+          <h2 className="text-white text-2xl font-bold absolute">
+            {blogData.title}
+          </h2>
         </div>
       </div>
+      <span className="text-lg font-bold">{blogData.author}</span> |{" "}
+      <span className="text-sm text-gray-600">{blogData.email}</span> |{" "}
+      <span className="text-sm text-gray-600">{blogData.date}</span>
       <p
         className="
         my-4
@@ -22,8 +37,7 @@ const Blog = () => {
     first-letter:font-serif
   "
       >
-        The only way to learn a new programming language is by writing programs
-        in it.
+        {blogData.content}
       </p>
     </div>
   );
