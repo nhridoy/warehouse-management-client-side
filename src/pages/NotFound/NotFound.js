@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="container mx-auto mt-32 md:mt-20">
+    <div className="container p-4 mx-auto mt-40 md:mt-20">
       <h2 className="text-3xl text-center my-4">Not Found</h2>
 
       <div className="w-1/2 mx-auto flex flex-col gap-4 items-center">

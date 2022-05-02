@@ -36,11 +36,11 @@ const AddNew = () => {
       });
   };
   return (
-    <div className="container mx-auto my-32 md:my-20">
+    <div className="container p-4 mx-auto my-40 md:my-20">
       <h2 className="text-xl text-center my-4">Add New Item</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-1/2 mx-auto flex flex-col gap-4"
+        className="w-2/3 md:w-1/2 mx-auto flex flex-col gap-4"
       >
         <input
           placeholder="Name"

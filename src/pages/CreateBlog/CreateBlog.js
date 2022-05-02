@@ -39,7 +39,7 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="container mx-auto mt-32 md:mt-20">
+    <div className="container p-4 mx-auto mt-40 md:mt-20">
       <div className="flex flex-col items-center justify-center my-2">
         <h1 className="text-4xl font-bold">Create Blog</h1>
       </div>

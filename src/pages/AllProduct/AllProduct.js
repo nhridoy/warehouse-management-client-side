@@ -118,7 +118,7 @@ const AllProduct = () => {
 
   const navigate = useNavigate();
   return (
-    <div className="container mx-auto mt-32 md:mt-20">
+    <div className="container p-4 mx-auto mt-40 md:mt-20">
       <button
         onClick={() => navigate("/addnew")}
         className="bg-blue-500 text-white font-bold py-2 px-4 rounded-full mb-4"
