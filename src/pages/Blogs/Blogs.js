@@ -1,14 +1,14 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import BlogItem from "../../components/BlogItem/BlogItem";
+import interceptors from "../../utils/interceptors";
 
 const Blogs = () => {
   const navigate = useNavigate();
   const [data, setData] = React.useState([]);
 
   useEffect(() => {
-    axios.get("https://myventory-nhridoy.herokuapp.com/blogs").then((res) => {
+    interceptors.get("/blogs").then((res) => {
       setData(res.data);
     });
   }, []);

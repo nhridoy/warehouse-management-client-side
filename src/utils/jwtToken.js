@@ -1,9 +1,9 @@
-import axios from "axios";
+import interceptors from "./interceptors";
 
 const jwtToken = (email) => {
   // GET ACCESS TOKEN
-  axios
-    .post(`https://myventory-nhridoy.herokuapp.com/login`, {
+  interceptors
+    .post(`/login`, {
       email,
     })
     .then((res) => {

@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import interceptors from "../../utils/interceptors";
 
 const HomeProducts = () => {
   const [data, setData] = React.useState([]);
@@ -10,11 +10,9 @@ const HomeProducts = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("https://myventory-nhridoy.herokuapp.com/topitems")
-      .then((res) => {
-        setData(res.data);
-      });
+    interceptors.get("/topitems").then((res) => {
+      setData(res.data);
+    });
   }, []);
 
   return (
@@ -26,7 +24,7 @@ const HomeProducts = () => {
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 mt-4">
         {data?.map((item) => (
-          <div className="p-4 border rounded-lg shadow-md">
+          <div key={item._id} className="p-4 border rounded-lg shadow-md">
             <img className="w-full h-80 object-cover" src={item?.image} />
             <div className="mt-2">
               <div className="">

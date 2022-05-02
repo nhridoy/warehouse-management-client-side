@@ -1,9 +1,9 @@
-import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import interceptors from "../../utils/interceptors";
 
 const CreateBlog = () => {
   const [user] = useAuthState(auth);
@@ -20,13 +20,8 @@ const CreateBlog = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    axios
-      .post("https://myventory-nhridoy.herokuapp.com/blogs", data, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    interceptors
+      .post("/blogs", data)
       .then((res) => {
         res.status === 200
           ? toast.success("Blog created successfully")

@@ -1,11 +1,11 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { CountUp } from "use-count-up";
+import interceptors from "../../utils/interceptors";
 
 const Counter = () => {
   const [data, setData] = React.useState({});
   useEffect(() => {
-    axios.get("http://127.0.0.1:5000/itemsummary").then((res) => {
+    interceptors.get("/itemsummary").then((res) => {
       setData(res.data);
     });
   }, []);

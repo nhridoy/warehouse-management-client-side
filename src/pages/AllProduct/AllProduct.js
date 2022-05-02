@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 
 import DataTable from "react-data-table-component";
@@ -6,6 +5,7 @@ import { FcFullTrash } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import interceptors from "../../utils/interceptors";
 
 const AllProduct = () => {
   const [data, setData] = React.useState([]);
@@ -14,25 +14,13 @@ const AllProduct = () => {
 
   useEffect(() => {
     if (path === "/all") {
-      axios
-        .get("https://myventory-nhridoy.herokuapp.com/items", {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((res) => {
-          setData(res.data);
-        });
+      interceptors.get("/items").then((res) => {
+        setData(res.data);
+      });
     } else if (path === "/myitems") {
-      axios
-        .get("https://myventory-nhridoy.herokuapp.com/myitems", {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((res) => {
-          setData(res.data);
-        });
+      interceptors.get("/myitems").then((res) => {
+        setData(res.data);
+      });
     }
   }, [path]);
 
@@ -47,16 +35,10 @@ const AllProduct = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.value) {
-        axios
-          .delete(`https://myventory-nhridoy.herokuapp.com/items/${id}`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          })
-          .then((res) => {
-            toast.success("Item deleted successfully");
-            setData(data.filter((item) => item._id !== id));
-          });
+        interceptors.delete(`/items/${id}`).then((res) => {
+          toast.success("Item deleted successfully");
+          setData(data.filter((item) => item._id !== id));
+        });
       }
     });
   };

@@ -1,16 +1,14 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import interceptors from "../../utils/interceptors";
 
 const Blog = () => {
   const { id } = useParams();
   const [blogData, setBlogData] = React.useState([]);
   useEffect(() => {
-    axios
-      .get(`https://myventory-nhridoy.herokuapp.com/blogs/${id}`)
-      .then((res) => {
-        setBlogData(res.data);
-      });
+    interceptors.get(`/blogs/${id}`).then((res) => {
+      setBlogData(res.data);
+    });
   }, []);
 
   return (

@@ -1,7 +1,7 @@
-import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import interceptors from "../../utils/interceptors";
 
 const AddNew = () => {
   const {
@@ -11,23 +11,15 @@ const AddNew = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    axios
-      .post(
-        "https://myventory-nhridoy.herokuapp.com/items",
-        {
-          name: data.name,
-          description: data.description,
-          price: parseFloat(data.price).toFixed(2),
-          quantity: parseInt(data.quantity),
-          supplier: data.supplier,
-          image: data.image,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
+    interceptors
+      .post("/items", {
+        name: data.name,
+        description: data.description,
+        price: parseFloat(data.price).toFixed(2),
+        quantity: parseInt(data.quantity),
+        supplier: data.supplier,
+        image: data.image,
+      })
       .then((res) => {
         if (res.status === 200) {
           reset();

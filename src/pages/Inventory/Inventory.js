@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import interceptors from "../../utils/interceptors";
 
 const Inventory = () => {
   const { id } = useParams();
@@ -19,29 +19,15 @@ const Inventory = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`https://myventory-nhridoy.herokuapp.com/items/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setItem(res.data);
-      });
+    interceptors.get(`/items/${id}`).then((res) => {
+      setItem(res.data);
+    });
   }, []);
 
   const handleQuantity = (number) => {
-    axios.patch(
-      `https://myventory-nhridoy.herokuapp.com/items/${id}`,
-      {
-        quantity: item.quantity + number,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
+    interceptors.patch(`/items/${id}`, {
+      quantity: item.quantity + number,
+    });
     const newItem = { ...item, quantity: item.quantity + number };
     setItem(newItem);
   };
