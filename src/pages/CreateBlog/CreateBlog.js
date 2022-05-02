@@ -22,7 +22,7 @@ const CreateBlog = () => {
   const onSubmit = (data) => {
     console.log(data);
     axios
-      .post("http://localhost:5000/blogs", data, {
+      .post("https://myventory-nhridoy.herokuapp.com/blogs", data, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },

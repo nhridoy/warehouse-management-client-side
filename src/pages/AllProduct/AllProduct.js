@@ -15,7 +15,7 @@ const AllProduct = () => {
   useEffect(() => {
     if (path === "/all") {
       axios
-        .get("http://localhost:5000/items", {
+        .get("https://myventory-nhridoy.herokuapp.com/items", {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -25,7 +25,7 @@ const AllProduct = () => {
         });
     } else if (path === "/myitems") {
       axios
-        .get("http://localhost:5000/myitems", {
+        .get("https://myventory-nhridoy.herokuapp.com/myitems", {
           headers: {
             authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -48,7 +48,7 @@ const AllProduct = () => {
     }).then((result) => {
       if (result.value) {
         axios
-          .delete(`http://localhost:5000/items/${id}`, {
+          .delete(`https://myventory-nhridoy.herokuapp.com/items/${id}`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },

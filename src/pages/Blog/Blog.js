@@ -6,9 +6,11 @@ const Blog = () => {
   const { id } = useParams();
   const [blogData, setBlogData] = React.useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/blogs/${id}`).then((res) => {
-      setBlogData(res.data);
-    });
+    axios
+      .get(`https://myventory-nhridoy.herokuapp.com/blogs/${id}`)
+      .then((res) => {
+        setBlogData(res.data);
+      });
   }, []);
 
   return (

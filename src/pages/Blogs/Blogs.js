@@ -8,7 +8,7 @@ const Blogs = () => {
   const [data, setData] = React.useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/blogs").then((res) => {
+    axios.get("https://myventory-nhridoy.herokuapp.com/blogs").then((res) => {
       setData(res.data);
     });
   }, []);

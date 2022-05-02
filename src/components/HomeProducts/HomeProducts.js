@@ -10,9 +10,11 @@ const HomeProducts = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:5000/topitems").then((res) => {
-      setData(res.data);
-    });
+    axios
+      .get("https://myventory-nhridoy.herokuapp.com/topitems")
+      .then((res) => {
+        setData(res.data);
+      });
   }, []);
 
   return (

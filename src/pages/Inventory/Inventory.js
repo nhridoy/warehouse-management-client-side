@@ -20,7 +20,7 @@ const Inventory = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/items/${id}`, {
+      .get(`https://myventory-nhridoy.herokuapp.com/items/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -32,7 +32,7 @@ const Inventory = () => {
 
   const handleQuantity = (number) => {
     axios.patch(
-      `http://localhost:5000/items/${id}`,
+      `https://myventory-nhridoy.herokuapp.com/items/${id}`,
       {
         quantity: item.quantity + number,
       },

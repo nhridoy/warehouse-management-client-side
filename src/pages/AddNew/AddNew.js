@@ -13,7 +13,7 @@ const AddNew = () => {
   const onSubmit = (data) => {
     axios
       .post(
-        "http://localhost:5000/items",
+        "https://myventory-nhridoy.herokuapp.com/items",
         {
           name: data.name,
           description: data.description,

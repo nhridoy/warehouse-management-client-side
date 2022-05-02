@@ -3,7 +3,7 @@ import axios from "axios";
 const jwtToken = (email) => {
   // GET ACCESS TOKEN
   axios
-    .post(`http://localhost:5000/login`, {
+    .post(`https://myventory-nhridoy.herokuapp.com/login`, {
       email,
     })
     .then((res) => {
