@@ -20,7 +20,7 @@ const Blog = () => {
           alt={blogData.title}
         />
         <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full bg-black/50 ">
-          <h2 className="text-white text-2xl font-bold absolute">
+          <h2 className="text-white text-center text-2xl font-bold absolute">
             {blogData.title}
           </h2>
         </div>
