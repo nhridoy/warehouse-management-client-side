@@ -1,9 +1,18 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import BlogItem from "../../components/BlogItem/BlogItem";
 
 const Blogs = () => {
   const navigate = useNavigate();
+  const [data, setData] = React.useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/blogs").then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
   return (
     <div className="container mx-auto mt-20">
       <div className="flex flex-col items-center justify-center my-2">
@@ -17,13 +26,10 @@ const Blogs = () => {
         Add New
       </button>
       <>
-        <BlogItem />
-        <BlogItem />
-        <BlogItem />
-        <BlogItem />
-        <BlogItem />
+        {data.map((blog) => (
+          <BlogItem key={blog._id} blog={blog} />
+        ))}
       </>
-      <Outlet />
     </div>
   );
 };
