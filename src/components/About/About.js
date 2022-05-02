@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div className="container p-4 mx-auto">
       <h2 className="text-3xl text-center font-semibold py-4">Why Us</h2>
-      <div className="grid items-center grid-cols-2 gap-4">
+      <div className="grid items-center md:grid-cols-2 gap-4">
         <img
           src="https://kinsta.com/wp-content/uploads/2017/10/wordpress-charts-2-1024x512.png"
           alt=""
