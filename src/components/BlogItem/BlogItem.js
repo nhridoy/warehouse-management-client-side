@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const BlogItem = ({ blog }) => {
   return (
-    <div className="flex items-center gap-4 border p-4 rounded-md shadow my-4">
+    <div className="flex flex-col md:flex-row items-center gap-4 border p-4 rounded-md shadow my-4">
       <img
         className="h-22 w-56 object-cover rounded-full"
         src={blog.image}
