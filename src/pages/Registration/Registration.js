@@ -47,7 +47,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="container mx-auto my-20">
+    <div className="container mx-auto my-32 md:my-20">
       <h2 className="text-xl text-center my-4">Registration</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}

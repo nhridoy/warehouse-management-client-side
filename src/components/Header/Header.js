@@ -13,7 +13,7 @@ const Header = () => {
         <Link to="/">
           <h1 className="text-4xl text-white">MyVentory</h1>
         </Link>
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-wrap justify-center gap-4 items-center">
           <Link to="/" className="text-white">
             Home
           </Link>

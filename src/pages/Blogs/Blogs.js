@@ -14,7 +14,7 @@ const Blogs = () => {
   }, []);
 
   return (
-    <div className="container mx-auto mt-20">
+    <div className="container mx-auto mt-32 md:mt-20">
       <div className="flex flex-col items-center justify-center my-2">
         <h1 className="text-4xl font-bold">Blogs</h1>
       </div>
