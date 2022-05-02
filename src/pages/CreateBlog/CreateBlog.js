@@ -1,6 +1,8 @@
+import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const CreateBlog = () => {
@@ -19,7 +21,21 @@ const CreateBlog = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    reset();
+    axios
+      .post("http://localhost:5000/blogs", data, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        res.status === 200
+          ? toast.success("Blog created successfully")
+          : toast.error("Error creating blog");
+        reset();
+      })
+      .catch((err) => {
+        toast.error("Error creating blog");
+      });
   };
 
   return (
@@ -89,7 +105,8 @@ const CreateBlog = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="author"
             type="text"
-            {...register("author", { required: true, disabled: true })}
+            readOnly
+            {...register("author", { required: true })}
           />
           {errors.author && (
             <span className="text-red-600">This field is required</span>

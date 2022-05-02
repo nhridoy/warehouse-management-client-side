@@ -14,7 +14,7 @@ const Blog = () => {
         </div>
       </div>
       <p
-        class="
+        className="
         my-4
     first-letter:text-4xl
     first-letter:font-bold
